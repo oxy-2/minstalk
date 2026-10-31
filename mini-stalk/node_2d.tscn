@@ -35,7 +35,12 @@ animations = [{
 
 [node name="Node2D" type="Node2D" unique_id=886060707]
 
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1398820801]
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=405904634]
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=997204972]
+script = ExtResource("6_hqns4")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=283453925]
 position = Vector2(2.0000002, 0)
@@ -51,4 +56,3 @@ sprite_frames = SubResource("SpriteFrames_wo6v7")
 animation = &"walk"
 frame = 2
 frame_progress = 0.8387906
-script = ExtResource("6_hqns4")
