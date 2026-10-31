@@ -42,11 +42,6 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=997204972]
 script = ExtResource("6_hqns4")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=283453925]
-position = Vector2(2.0000002, 0)
-scale = Vector2(0.96874994, 1)
-texture = ExtResource("1_kdubu")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2133500559]
 shape = SubResource("CapsuleShape2D_geruv")
 
