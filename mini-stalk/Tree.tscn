@@ -10,19 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dmvhyvyknhyng" path="res://assets/Map Props/Dirt4.png" id="4_gt76g"]
 [ext_resource type="Texture2D" uid="uid://df33htgylrr8x" path="res://assets/Map Props/tree1.png" id="5_1fr6y"]
 [ext_resource type="Texture2D" uid="uid://dakwr7jtwudvf" path="res://assets/art/enemies/No faction MC/MCNOFACTIONOBSERVER5.png" id="5_ir8iy"]
-[ext_resource type="Texture2D" uid="uid://c1c0wy4vg3yd0" path="res://tree1.png" id="6_2hxjc"]
 [ext_resource type="Script" uid="uid://bunf6ock7h68g" path="res://mcwalk.gd" id="6_hqns4"]
-[ext_resource type="Texture2D" uid="uid://bw2lfd1gpwd2" path="res://tree2.png" id="7_ebxd8"]
-[ext_resource type="Texture2D" uid="uid://bevav4uhpi7yc" path="res://tree3.png" id="8_2u7jv"]
-[ext_resource type="Texture2D" uid="uid://c6ji55l5y4gv0" path="res://tree4.png" id="9_24dk6"]
-[ext_resource type="Texture2D" uid="uid://7hsxxpwj4jtc" path="res://tree5.png" id="10_mryly"]
-[ext_resource type="Texture2D" uid="uid://c57nye5b7nl27" path="res://tree6.png" id="11_kq1c5"]
-[ext_resource type="Texture2D" uid="uid://offqbp64ef6w" path="res://tree7.png" id="12_ornx7"]
-[ext_resource type="Texture2D" uid="uid://d0moc66gllqg1" path="res://tree8.png" id="13_cnnru"]
-[ext_resource type="Texture2D" uid="uid://cep02uk3wuxgn" path="res://tree9.png" id="14_540hr"]
-[ext_resource type="Texture2D" uid="uid://b0onn1tmpxt7p" path="res://tree10.png" id="15_6ip5v"]
-[ext_resource type="Texture2D" uid="uid://2bupx7ow122l" path="res://tree11.png" id="16_q5dlx"]
-[ext_resource type="Texture2D" uid="uid://tvgijgbn0p" path="res://tree12.png" id="17_c4wnb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7plk7"]
 texture = ExtResource("1_e8dv2")
@@ -132,40 +120,40 @@ sources/0 = SubResource("TileSetAtlasSource_lbrxf")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_2hxjc")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_ebxd8")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_2u7jv")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_24dk6")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_mryly")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_kq1c5")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_ornx7")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_cnnru")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_540hr")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_6ip5v")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_q5dlx")
+"texture": null
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_c4wnb")
+"texture": null
 }],
 "loop": 1,
 "name": &"Tree moving",
@@ -222,11 +210,6 @@ animation = &"Tree moving"
 frame_progress = 0.09917617
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=997204972]
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=283453925]
-position = Vector2(2.0000002, 0)
-scale = Vector2(0.96874994, 1)
-texture = ExtResource("1_kdubu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2133500559]
 shape = SubResource("CapsuleShape2D_geruv")
