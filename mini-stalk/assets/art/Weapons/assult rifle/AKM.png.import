@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ffeqk4h1iuyd"
-path="res://.godot/imported/AKM.png-432e78474ad2962fd6a6d79de0d747af.ctex"
+path="res://.godot/imported/AKM.png-6e4d645fd5b221ddf21f290f4b1656cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/weapons/assult rifle/AKM.png"
-dest_files=["res://.godot/imported/AKM.png-432e78474ad2962fd6a6d79de0d747af.ctex"]
+source_file="res://assets/art/Weapons/assult rifle/AKM.png"
+dest_files=["res://.godot/imported/AKM.png-6e4d645fd5b221ddf21f290f4b1656cf.ctex"]
 
 [params]
 
