@@ -482,16 +482,16 @@ position = Vector2(1538, 198)
 position = Vector2(2150, -120)
 
 [node name="obelisk" parent="." unique_id=1409942290 instance=ExtResource("27_1fr6y")]
-position = Vector2(2568, -440)
+position = Vector2(3235, -390)
 
 [node name="obelisk2" parent="." unique_id=683922240 instance=ExtResource("27_1fr6y")]
-position = Vector2(2510, -371)
+position = Vector2(3300, -180)
 
 [node name="obelisk3" parent="." unique_id=281218201 instance=ExtResource("27_1fr6y")]
-position = Vector2(2437, 247)
+position = Vector2(3322, 84)
 
 [node name="obelisk4" parent="." unique_id=390535404 instance=ExtResource("27_1fr6y")]
-position = Vector2(2637, 370)
+position = Vector2(3287, 321)
 
 [node name="GameUI" type="CanvasLayer" parent="." unique_id=1483682875]
 process_mode = 3
