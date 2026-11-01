@@ -1,7 +1,7 @@
 
 # what we made this week
 
-so like we wanted to make a game and we did okay but its a demo we made, we kinda just made a short prologue for a game we *MIGHT* further develop this game later, either that or we turn it into flappybird im not gonna lie, cuz like we need a done product for thirdspace and we shot very high i think sobbing emohi, but yeah rn we have two diff types of enemies i did all the code for em, we have a character that can move and for the first game i ever made i thin kits decent, anyways thats abt it i think.
+so like we wanted to make a game and we did okay but its a demo we made, we kinda just made a short prologue for a game we *MIGHT* further develop later but for now its jus a goofy lil demo kinda game or proof of concept,  i think sobbing emohi, but yeah rn we have two diff types of enemies i did all the code for em, we have a character that can move and for the first game i ever made i thin kits decent, anyways thats abt it i think.
 
 
 # art and stuff
