@@ -7,9 +7,9 @@ ministalk is a game about exploring and fighting enemies in a wasteland, done al
 
 
 here are some screenshots from the game:
-![[Pasted image 20261101154318.png]]
-![[Pasted image 20261101154335.png]]
-![[Pasted image 20261101154417.png]]
+![[godot.png]]
+![[titlescreen.png]]
+![[in-game with obelisk.png]]
 
 thank you for your time :D
 

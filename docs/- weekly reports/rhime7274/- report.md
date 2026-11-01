@@ -6,19 +6,19 @@ for what we did:
 
 we made like a small map with like the map props and gave a hitbox for like a boundry and i made the enemies and weapons and health and damage and stuff
 
-![[Pasted image 20261101155015.png]]
+![[map.png]]
 
 then we have the like characters, we got the outlaws
-![[Pasted image 20261101155045.png]]
+![[outlaw.png]]
 
 we got the obelisk guys (military peoples)
-![[Pasted image 20261101155122.png]]
+![[obelisk.png]]
 
 and lastly we got the player character who admitidly looks very goofy
-![[Pasted image 20261101155200.png]]
+![[main character.png]]
 
 they all move by like bouncing up and down and thats cuz its what we decided to do to animate them in libresprite, speaking of libresprite, art it took alot of time for us to do and we did alot, more than we could implement sadly but in the end im happy with what we have, heres just a pic of all the art folders
-![[Pasted image 20261101155358.png]]
+![[art files.png]]
 
 and theres more but that all i could fit on my long second monitor
 but yeah so in libresprite i made healing items, items, just a bunch of random stuff in general, ill link all the timelapses below but yeah most the time working i spent was unirnoically debugging and trying to figure out what on earth godot is and how do i use it, yk im like a engineering guy with electronics, games make no sense to me and i was very confused thruout lol but yeah its okay and in the end i had a good time and im happy, very happy me and my team got a well deserved break.
