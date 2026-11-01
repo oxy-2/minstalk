@@ -1,8 +1,6 @@
 extends "res://gunlogic.gd"
-@onready var audio = $AudioStreamPlayer
+@onready var audio: AudioStreamPlayer = $AudioStreamPlayer
+@onready var outlaw
 
-
-func _process(delta: float) -> void:
-	if _shoot():
-		audio.stream = shoot_audio
-		audio.play()
+func _ready() -> void:
+	audio.stream = shoot_audio

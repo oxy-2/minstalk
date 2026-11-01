@@ -12,10 +12,12 @@ extends Node2D
 @export var aimheight := 0.0
 @export var spread := 0.0
 @export var maxfiredist := 0.0
+@export var shoot_audio: AudioStream
 
 @onready var muzzle = $Muzzle
 @onready var ginsprite = $Sprite2D
 @onready var shooter = get_parent()
+@onready var audio: AudioStreamPlayer = get_node_or_null("AudioStreamPlayer")
 
 var reloading := false
 var _cooldown := 0.0
@@ -95,7 +97,7 @@ func _can_enemy_fire() -> bool:
 		return shooter.activated
 	return true
 
-func _shoot(angle_error: float) -> void:
+func _shoot(angle_error: float):
 	if bulletscene == null:
 		return
 	var packed = bulletscene.instantiate()
@@ -107,6 +109,7 @@ func _shoot(angle_error: float) -> void:
 	get_tree().current_scene.add_child(packed)
 	packed.global_position = muzzle.global_position
 	_cooldown = shootcooldown
+	_play_shoot_sound()
 
 # never let the gun art go upside down
 func _keepgunupright() -> void:
@@ -114,3 +117,9 @@ func _keepgunupright() -> void:
 		return
 	var ang = wrapf(rotation, -PI, PI)
 	ginsprite.flip_v = absf(ang) > PI / 2.0
+	
+func _play_shoot_sound() -> void:
+	if audio == null or shoot_audio == null:
+		return
+	audio.stream = shoot_audio
+	audio.play()

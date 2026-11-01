@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://d37yomy0oaawf" path="res://assets/Map Props/tree10.png" id="17_7plk7"]
 [ext_resource type="Script" uid="uid://ck8u8a0t4pq2h" path="res://treeAnimated.gd" id="18_fbwgr"]
 [ext_resource type="PackedScene" uid="uid://b1s0r3aenqaqy" path="res://outlaw.tscn" id="25_bjha6"]
+[ext_resource type="AudioStream" uid="uid://belkdqtt02qc2" path="res://assets/sounds/input/makarov.mp3" id="26_2hxjc"]
 [ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="26_pistol"]
 [ext_resource type="PackedScene" uid="uid://cw56tp6hgryo5" path="res://obelisk.tscn" id="27_1fr6y"]
 [ext_resource type="Script" uid="uid://cy7vjp4yos8xj" path="res://gameui.gd" id="28_ui"]
@@ -469,8 +470,10 @@ zoom = Vector2(1.5, 1.5)
 [node name="pistol" parent="CharacterBody2D" unique_id=2078748209 instance=ExtResource("26_pistol")]
 position = Vector2(12, 0)
 scale = Vector2(0.7, 0.7)
+shoot_audio = ExtResource("26_2hxjc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D/pistol" unique_id=88507451]
+volume_db = -20.0
 
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)
