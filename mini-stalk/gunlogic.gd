@@ -6,10 +6,12 @@ extends Node2D
 @export var turnspeed := 3.0
 @export var swayamount := 0.08
 @export var swayspeed := 1.1
+@export var shoot_audio : AudioStreamMP3
 
 @onready var muzzle = $Muzzle
 @onready var ginsprite = $Sprite2D
 @onready var shooter = get_parent()
+
 
 var _cooldown := 0.0
 var _enemytimer := 0.0
@@ -75,6 +77,8 @@ func _shoot(angle_error: float) -> void:
 	get_tree().current_scene.add_child(packed)
 	packed.global_position = muzzle.global_position
 	_cooldown = shootcooldown
+	
+	
 
 # never let the gun art go upside down
 func _keepgunupright() -> void:

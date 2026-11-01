@@ -25,7 +25,9 @@
 [ext_resource type="Texture2D" uid="uid://d37yomy0oaawf" path="res://assets/Map Props/tree10.png" id="17_7plk7"]
 [ext_resource type="Script" uid="uid://ck8u8a0t4pq2h" path="res://treeAnimated.gd" id="18_fbwgr"]
 [ext_resource type="PackedScene" uid="uid://b1s0r3aenqaqy" path="res://outlaw.tscn" id="25_bjha6"]
+[ext_resource type="AudioStream" uid="uid://belkdqtt02qc2" path="res://assets/sounds/input/makarov.mp3" id="26_2hxjc"]
 [ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="26_pistol"]
+[ext_resource type="Script" uid="uid://b8gunlog1c0a" path="res://gunlogic.gd" id="27_ebxd8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mj2a"]
 texture = ExtResource("1_2nhjh")
@@ -426,6 +428,8 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_gjj8i"]
+
 [node name="Node2D" type="Node2D" unique_id=886060707]
 
 [node name="Ground" type="TileMapLayer" parent="." unique_id=1398820801]
@@ -468,7 +472,10 @@ zoom = Vector2(2, 2)
 position = Vector2(12, 0)
 scale = Vector2(0.6329904, 0.7795791)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D" unique_id=88507451]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D/pistol" unique_id=88507451]
+stream = ExtResource("26_2hxjc")
+script = ExtResource("27_ebxd8")
+shoot_audio = SubResource("AudioStreamMP3_gjj8i")
 
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)
