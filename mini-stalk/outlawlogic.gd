@@ -12,6 +12,7 @@ extends CharacterBody2D
 var activated := false
 var _strafedir := 1.0
 var _strafetimer := 0.0
+var blood = load("res://bloodFIXED.tscn")
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -59,6 +60,9 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int) -> void:
 	health -= amount
 	print(name, " hp: ", health)
+	var blood_instance = blood.instantiate()
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
 	if health <= 0:
 		print(name, " died")
 		queue_free()

@@ -22,6 +22,7 @@ var _path: PackedVector2Array = []
 var _pathi := 0
 var _repathtimer := 0.0
 var _grid: AStarGrid2D
+var blood = load("res://bloodFIXED.tscn")
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -197,6 +198,9 @@ func take_damage(amount: int) -> void:
 	activated = true
 	ohealth -= amount
 	print(name, " hp: ", ohealth)
+	var blood_instance = blood.instantiate()
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
 	if ohealth <= 0:
 		print(name, " died")
 		queue_free()

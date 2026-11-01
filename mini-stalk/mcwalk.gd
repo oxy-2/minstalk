@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var blood = load("res://bloodFIXED.tscn")
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") #wasd
 	
@@ -29,6 +31,9 @@ func _physics_process(delta: float) -> void:
 func take_damage(amount: int) -> void:
 	health -= amount
 	print("player hp: ", health)
+	var blood_instance = blood.instantiate()
+	get_tree().current_scene.add_child(blood_instance)
+	blood_instance.global_position = global_position
 	if health <= 0:
 		print("player died")
 		var ui = get_tree().get_first_node_in_group("gameui")
