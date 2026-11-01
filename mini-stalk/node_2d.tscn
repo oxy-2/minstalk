@@ -463,6 +463,8 @@ frame_progress = 0.8387906
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=851884585]
 zoom = Vector2(1.25, 1.25)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D" unique_id=88507451]
+
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)
 
