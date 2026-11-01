@@ -55,3 +55,4 @@ rect = Rect2(-40, -40, 80, 80)
 [node name="akm" parent="obelisk" unique_id=248630439 instance=ExtResource("7_akm")]
 position = Vector2(8, 0)
 turnspeed = 6.0
+maxfiredist = 0.0

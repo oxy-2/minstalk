@@ -5,7 +5,8 @@ extends CharacterBody2D
 @export var okeepdistance := 180.0
 @export var oreloadkeepdistance := 240.0
 @export var ostrafespeed := 120.0
-@export var obulletaggro := 480.0
+@export var obulletaggro := 600.0
+@export var oaggrotime := 2.5
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var anim = $obelisksprite
@@ -15,6 +16,7 @@ const CELL := 28.0
 const HALFW := 10
 
 var activated := false
+var _aggrotimer := 0.0
 var _strafetime := 0.0
 var _path: PackedVector2Array = []
 var _pathi := 0
@@ -31,7 +33,7 @@ func _on_screen_entered() -> void:
 		print(name, " woke up")
 
 func is_gun_ready() -> bool:
-	return activated
+	return _aggrotimer > 0.0
 
 func _is_reloading() -> bool:
 	for child in get_children():
@@ -45,11 +47,17 @@ func _physics_process(delta: float) -> void:
 		anim.stop()
 		return
 
-	if not activated and _player_bullet_nearby():
+	# see you, see a bullet, or just got shot -> fight. otherwise fade after a few seconds
+	if _stimulus():
+		if _aggrotimer <= 0.0:
+			print(name, " aggro")
+		_aggrotimer = oaggrotime
 		activated = true
-		print(name, " return fire")
+	else:
+		_aggrotimer -= delta
 
-	if not activated:
+	if _aggrotimer <= 0.0:
+		activated = false
 		velocity = Vector2.ZERO
 		anim.stop()
 		return
@@ -170,6 +178,11 @@ func _ray_free(dir: Vector2) -> bool:
 		return true
 	return hit.get("collider") is CharacterBody2D
 
+func _stimulus() -> bool:
+	if notifier.is_on_screen():
+		return true
+	return _player_bullet_nearby()
+
 func _player_bullet_nearby() -> bool:
 	for b in get_tree().get_nodes_in_group("bullet"):
 		if not is_instance_valid(b):
@@ -180,6 +193,8 @@ func _player_bullet_nearby() -> bool:
 	return false
 
 func take_damage(amount: int) -> void:
+	_aggrotimer = oaggrotime
+	activated = true
 	ohealth -= amount
 	print(name, " hp: ", ohealth)
 	if ohealth <= 0:
