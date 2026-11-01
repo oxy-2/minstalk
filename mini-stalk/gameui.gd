@@ -1,5 +1,4 @@
 extends CanvasLayer
-
 # start menu + death screen. plain buttons now, swap for png hit-areas later.
 
 const BG_PATH := "res://assets/art/menus/pda/menu_screen_pda.png"      # <<< PUT YOUR MENU/DEATH PDA FILE PATH HERE (e.g. "res://sprites/pda.png")

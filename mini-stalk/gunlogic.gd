@@ -39,7 +39,7 @@ func _physics_process(delta: float) -> void:
 		look_at(get_global_mouse_position())
 		_aimangle = rotation
 		_keepgunupright()
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and _cooldown <= 0.0:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and _cooldown <= 0.0 and not Input.is_key_pressed(KEY_E):
 			_shoot(0.0)
 		return
 

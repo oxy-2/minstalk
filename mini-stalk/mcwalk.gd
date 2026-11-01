@@ -3,17 +3,30 @@ extends CharacterBody2D
 @export var SPEED : float = 200.00
 @export var SPRINT_SPEED : float = 300.00
 @export var health := 10
+@export var max_health := 10
+@export var stim_multiplier := 2.0
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var _stim_timer := 0.0
+
 var blood = load("res://bloodFIXED.tscn")
 
+func apply_stim(duration: float) -> void:
+	_stim_timer = duration
+
+func heal(amount: int) -> void:
+	health = mini(health + amount, max_health)
+	print("player hp: ", health)
+
 func _physics_process(delta: float) -> void:
+	_stim_timer = maxf(_stim_timer - delta, 0.0)
+	var boost = stim_multiplier if _stim_timer > 0.0 else 1.0
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") #wasd
 	
-	var currentspeed = SPEED
+	var currentspeed = SPEED * boost
 	if Input.is_key_pressed(KEY_SHIFT): #sprint stuff
-		currentspeed = SPRINT_SPEED
+		currentspeed = SPRINT_SPEED * boost
 		
 	if direction != Vector2.ZERO: #moves
 		velocity = direction * currentspeed
