@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var obeliskspeed := 80.0
+@export var obeliskspeed := 280.0
 @export var ohealth := 5
 @export var okeepdistance := 180.0
 @export var oreloadkeepdistance := 240.0
