@@ -46,6 +46,7 @@ func _ready() -> void:
 		show_menu()
 
 func _process(_delta: float) -> void:
+	hpbar.visible = not (intro.visible or menu.visible or death.visible)
 	_update_hp()
 
 # ---------- intro ----------
