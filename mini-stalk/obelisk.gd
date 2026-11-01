@@ -12,6 +12,15 @@ extends CharacterBody2D
 @onready var anim = $obelisksprite
 @onready var notifier = $VisibleOnScreenNotifier2D
 
+var engage_voicelines: Array[AudioStream] = [
+	preload("assets/sounds/input/obliskvoicelines/zealotVoice1.mp3"),
+	preload("assets/sounds/input/obliskvoicelines/zealotVoice2.mp3"),
+	preload("assets/sounds/input/obliskvoicelines/zealotVoiceCombat1.mp3"),
+	preload("assets/sounds/input/obliskvoicelines/zealotVoiceCombat2.mp3"),
+	preload("assets/sounds/input/obliskvoicelines/zealotVoiceCombat3.mp3"),
+	]
+
+
 const CELL := 28.0
 const HALFW := 10
 
@@ -28,10 +37,22 @@ func _ready() -> void:
 	add_to_group("enemy")
 	notifier.screen_entered.connect(_on_screen_entered)
 
+
+func _play_random_voiceline(lines: Array[AudioStream]) -> void:
+	if lines.is_empty():
+		return
+	var sfx := AudioStreamPlayer2D.new()
+	sfx.stream = lines.pick_random()
+	sfx.global_position = global_position
+	sfx.finished.connect(sfx.queue_free)
+	get_tree().current_scene.add_child(sfx)
+	sfx.play()
+
 func _on_screen_entered() -> void:
 	if not activated:
 		activated = true
 		print(name, " woke up")
+	_play_random_voiceline(engage_voicelines)
 
 func is_gun_ready() -> bool:
 	return _aggrotimer > 0.0
@@ -204,3 +225,5 @@ func take_damage(amount: int) -> void:
 	if ohealth <= 0:
 		print(name, " died")
 		queue_free()
+
+
