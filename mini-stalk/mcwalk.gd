@@ -1,13 +1,19 @@
 extends CharacterBody2D
 
-@export var SPEED : float = 250.0
+@export var SPEED : float = 200.00
+@export var SPRINT_SPEED : float = 300.00
 
 @onready var animated_sprite = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down") #wasd
+	
+	var currentspeed = SPEED
+	if Input.is_key_pressed(KEY_SHIFT): #sprint stuff
+		currentspeed = SPRINT_SPEED
+		
 	if direction != Vector2.ZERO: #moves
-		velocity = direction * SPEED
+		velocity = direction * currentspeed
 		animated_sprite.play("walk") #animation #bhoppingaura
 		if direction.x < 0:
 			animated_sprite.flip_h = true #sleide to the left

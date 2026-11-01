@@ -210,6 +210,7 @@ animation = &"Tree moving"
 frame_progress = 0.09917617
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=997204972]
+script = ExtResource("6_hqns4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2133500559]
 shape = SubResource("CapsuleShape2D_geruv")
@@ -220,6 +221,5 @@ sprite_frames = SubResource("SpriteFrames_wo6v7")
 animation = &"walk"
 frame = 2
 frame_progress = 0.8387906
-script = ExtResource("6_hqns4")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=1019634137]

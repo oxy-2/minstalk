@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bxour1ettk71y" path="res://assets/Map Props/tree9.png" id="16_c4wnb"]
 [ext_resource type="Texture2D" uid="uid://d37yomy0oaawf" path="res://assets/Map Props/tree10.png" id="17_7plk7"]
 [ext_resource type="Script" uid="uid://ck8u8a0t4pq2h" path="res://treeAnimated.gd" id="18_fbwgr"]
+[ext_resource type="PackedScene" uid="uid://b1s0r3aenqaqy" path="res://outlaw.tscn" id="25_bjha6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mj2a"]
 texture = ExtResource("1_2nhjh")
@@ -421,7 +422,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="Node2D" type="Node2D" unique_id=886060707]
@@ -441,6 +442,11 @@ sprite_frames = SubResource("SpriteFrames_kqwvt")
 frame_progress = 0.38515627
 script = ExtResource("18_fbwgr")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1476229330]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1451208181]
+polygon = PackedVector2Array(-218, -46, -219, 51, -118, 127, 267, 183, 331, 252, 379, 253, 452, 309, 522, 306, 584, 242, 906, 251, 966, 313, 1103, 309, 1147, 242, 1214, 247, 1287, 194, 1452, 176, 1563, 258, 1861, 244, 1972, 118, 2052, 123, 2112, 61, 2187, 65, 2238, 10, 2298, 12, 2298, 60, 2367, 263, 2434, 314, 2561, 385, 2813, 444, 2895, 498, 3269, 508, 3328, 448, 3401, 437, 3455, 374, 3520, 316, 3577, 244, 3584, -323, 3322, -589, 2686, -582, 2613, -528, 2551, -519, 2497, -455, 2422, -391, 2431, -316, 2365, -248, 2365, -141, 2235, -146, 2176, -205, 1733, -203, 1655, -123, 1533, -139, 1457, -210, 1335, -269, 1205, -191, 1028, -193, 971, -146, 901, -71, 460, -71, 382, -5, 330, -7, 184, -66, 123, -129, -69, -135, -124, -68, -218, -46, -451, -63, -453, -827, 3832, -850, 3767, 782, -471, 738, -451, -63)
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=997204972]
 script = ExtResource("6_hqns4")
 
@@ -453,3 +459,15 @@ sprite_frames = SubResource("SpriteFrames_wo6v7")
 animation = &"walk"
 frame = 2
 frame_progress = 0.8387906
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=851884585]
+zoom = Vector2(1.25, 1.25)
+
+[node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
+position = Vector2(1011, -72)
+
+[node name="outlaw2" parent="." unique_id=1017871250 instance=ExtResource("25_bjha6")]
+position = Vector2(1538, 198)
+
+[node name="outlaw3" parent="." unique_id=182126931 instance=ExtResource("25_bjha6")]
+position = Vector2(2150, -120)
