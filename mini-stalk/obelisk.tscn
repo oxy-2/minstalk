@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bxtrbs74ny0jc" path="res://assets/art/enemies/obelisk/obelisk4.png" id="5_8ii3l"]
 [ext_resource type="Texture2D" uid="uid://dw7nuxjj5cqst" path="res://assets/art/enemies/obelisk/obelisk5.png" id="6_uxa0q"]
 [ext_resource type="PackedScene" uid="uid://c8akm00rifle1" path="res://akm.tscn" id="7_akm"]
+[ext_resource type="AudioStream" uid="uid://cblro7t02vl46" path="res://assets/sounds/input/akm.mp3" id="8_kjonp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n4y1h"]
 radius = 15.0
@@ -54,5 +55,10 @@ rect = Rect2(-40, -40, 80, 80)
 
 [node name="akm" parent="obelisk" unique_id=248630439 instance=ExtResource("7_akm")]
 position = Vector2(8, 0)
+enemyinterval = 0.25
 turnspeed = 6.0
 maxfiredist = 0.0
+shoot_audio = ExtResource("8_kjonp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="obelisk/akm" unique_id=1514010117]
+volume_db = -10.0
