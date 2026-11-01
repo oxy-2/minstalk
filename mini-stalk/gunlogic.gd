@@ -2,7 +2,7 @@ extends Node2D
 
 @export var bulletscene: PackedScene = preload("res://bullet.tscn")
 @export var shootcooldown := 0.25
-@export var enemyinterval := 0.9
+@export var enemyinterval := 0.5
 @export var turnspeed := 3.0
 @export var swayamount := 0.08
 @export var swayspeed := 1.1

@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://ck8u8a0t4pq2h" path="res://treeAnimated.gd" id="18_fbwgr"]
 [ext_resource type="PackedScene" uid="uid://b1s0r3aenqaqy" path="res://outlaw.tscn" id="25_bjha6"]
 [ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="26_pistol"]
+[ext_resource type="PackedScene" uid="uid://cw56tp6hgryo5" path="res://obelisk.tscn" id="27_1fr6y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mj2a"]
 texture = ExtResource("1_2nhjh")
@@ -466,7 +467,7 @@ zoom = Vector2(2, 2)
 
 [node name="pistol" parent="CharacterBody2D" unique_id=2078748209 instance=ExtResource("26_pistol")]
 position = Vector2(12, 0)
-scale = Vector2(0.6329904, 0.7795791)
+scale = Vector2(0.7, 0.7)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D" unique_id=88507451]
 
@@ -478,3 +479,6 @@ position = Vector2(1538, 198)
 
 [node name="outlaw3" parent="." unique_id=182126931 instance=ExtResource("25_bjha6")]
 position = Vector2(2150, -120)
+
+[node name="obelisk" parent="." unique_id=1409942290 instance=ExtResource("27_1fr6y")]
+position = Vector2(2800, -10)
