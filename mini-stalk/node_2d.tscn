@@ -468,6 +468,8 @@ zoom = Vector2(2, 2)
 position = Vector2(12, 0)
 scale = Vector2(0.6329904, 0.7795791)
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D" unique_id=88507451]
+
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)
 
