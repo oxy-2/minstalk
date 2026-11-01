@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var SPEED := 200.0
+@export var outlawspeed := 60.0
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var anim = $outlawsprite
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var dir = (player.global_position - global_position).normalized()
-	velocity = dir * SPEED
+	velocity = dir * outlawspeed
 	anim.play("walk")
 	anim.flip_h = dir.x < 0
 	move_and_slide()
