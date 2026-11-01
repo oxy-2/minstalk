@@ -30,7 +30,7 @@ animations = [{
 "texture": ExtResource("5_n3210")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -46,7 +46,7 @@ shape = SubResource("CapsuleShape2D_dxifv")
 [node name="outlawsprite" type="AnimatedSprite2D" parent="outlaw" unique_id=896759947]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_geruv")
-frame_progress = 0.077614345
+animation = &"walk"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="outlaw" unique_id=1962289252]
 rect = Rect2(-6, -26, 11, 14)
