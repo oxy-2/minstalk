@@ -7,9 +7,9 @@ ministalk is a game about exploring and fighting enemies in a wasteland, done al
 
 
 here are some screenshots from the game:
-![[https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/godot.png?raw=true]]
-![[https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/titlescreen.png?raw=true]]
-![[https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/in-game%20with%20obelisk.png?raw=true]]
+![godot](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/godot.png?raw=true)
+![titlescreen](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/titlescreen.png?raw=true)
+![](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/in-game%20with%20obelisk.png?raw=true)
 
 thank you for your time :D
 
