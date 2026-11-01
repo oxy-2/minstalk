@@ -2,12 +2,27 @@ extends CanvasLayer
 
 # start menu + death screen. plain buttons now, swap for png hit-areas later.
 
+const BG_PATH := "res://assets/art/menus/pda/menu_screen_pda.png"      # <<< PUT YOUR MENU/DEATH PDA FILE PATH HERE (e.g. "res://sprites/pda.png")
+const INTRO_PATH := "res://assets/art/menus/title screen/menu_screen_pda.png"   # <<< PUT YOUR SECOND (INTRO) SPRITE FILE PATH HERE
+const INTRO_TIME := 5.0                      # <<< how long the intro stays on screen (seconds)
+const PDA_SCALE := 1.25                      # <<< SIZE: sprite side = screen height * this. Bigger number = bigger PDA
+
+# <<< BUTTON AREA: where the PDA's light screen is, as fractions of the sprite (0.0 - 1.0).
+# Nudge these if the buttons don't sit perfectly inside the screen.
+const SCREEN_LEFT := 0.12
+const SCREEN_RIGHT := 0.70
+const SCREEN_TOP := 0.28
+const SCREEN_BOTTOM := 0.72
+
 var menu: Control
 var death: Control
+var intro: Control
 var hpbar: Control
 var hpfill: ColorRect
 var hplabel: Label
+var _panels: Array = []   # every PDA panel, so they can all be resized together
 static var _skip_menu := false
+static var _intro_done := false   # stays true after the first launch, so restarts skip the intro
 var _maxhp := 10
 
 func _ready() -> void:
@@ -16,15 +31,128 @@ func _ready() -> void:
 	_build_menu()
 	_build_death()
 	_build_hp()
+	_build_intro()   # built last so it draws on top of everything
+	_resize_panels()
+	get_viewport().size_changed.connect(_resize_panels)
 	print("gameui ready, skip=", _skip_menu)
 	if _skip_menu:
 		_skip_menu = false
+		intro.visible = false
 		start_game()
+	elif not _intro_done:
+		show_intro()
 	else:
+		intro.visible = false
 		show_menu()
 
 func _process(_delta: float) -> void:
 	_update_hp()
+
+# ---------- intro ----------
+
+func _build_intro() -> void:
+	intro = Control.new()
+	intro.name = "Intro"
+	intro.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	intro.process_mode = Node.PROCESS_MODE_ALWAYS
+	intro.mouse_filter = Control.MOUSE_FILTER_STOP   # blocks clicks on the menu underneath
+
+	# no dark overlay here, the menu underneath already has one
+
+	var frame = Control.new()
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.set_anchors_preset(Control.PRESET_CENTER)
+	intro.add_child(frame)
+
+	var spr = TextureRect.new()
+	spr.texture = load(INTRO_PATH)
+	spr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	spr.stretch_mode = TextureRect.STRETCH_SCALE
+	spr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # uncomment for crisp pixel art
+	spr.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.add_child(spr)
+
+	_panels.append({"frame": frame})   # resized together with the other panels
+	add_child(intro)
+
+func show_intro() -> void:
+	get_tree().paused = true
+	menu.visible = true     # menu is drawn underneath the intro
+	death.visible = false
+	intro.visible = true
+	await get_tree().create_timer(INTRO_TIME).timeout
+	_intro_done = true
+	intro.visible = false   # instant snap to the menu underneath
+
+# ---------- PDA panels (menu + death) ----------
+
+# builds the PDA sprite with a title and buttons inside its screen
+# buttons = [["Text", callable], ...]
+func _make_pda_panel(parent: Control, title_text: String, buttons: Array) -> void:
+	var frame = Control.new()
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	frame.set_anchors_preset(Control.PRESET_CENTER)   # anchored to screen center, size set in _resize_panels
+	parent.add_child(frame)
+
+	var spr = TextureRect.new()
+	spr.texture = load(BG_PATH)
+	spr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	spr.stretch_mode = TextureRect.STRETCH_SCALE
+	spr.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	# spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST  # uncomment for crisp pixel art
+	spr.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	frame.add_child(spr)
+
+	# the area inside the PDA's screen
+	var screen = Control.new()
+	screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	screen.anchor_left = SCREEN_LEFT
+	screen.anchor_right = SCREEN_RIGHT
+	screen.anchor_top = SCREEN_TOP
+	screen.anchor_bottom = SCREEN_BOTTOM
+	frame.add_child(screen)
+
+	var box = VBoxContainer.new()
+	box.alignment = BoxContainer.ALIGNMENT_CENTER
+	box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	screen.add_child(box)
+
+	var title = Label.new()
+	title.text = title_text
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1))   # dark text on the light screen
+	box.add_child(title)
+
+	var btns: Array = []
+	for b in buttons:
+		var btn = Button.new()
+		btn.text = b[0]
+		btn.pressed.connect(b[1])
+		box.add_child(btn)
+		btns.append(btn)
+
+	_panels.append({"frame": frame, "box": box, "title": title, "buttons": btns})
+
+func _resize_panels() -> void:
+	var vp := get_viewport().get_visible_rect().size
+	var side := vp.y * PDA_SCALE
+	var u := side / 800.0   # scale factor for fonts and button sizes
+	for p in _panels:
+		var f: Control = p["frame"]
+		f.offset_left = -side / 2.0
+		f.offset_right = side / 2.0
+		f.offset_top = -side / 2.0
+		f.offset_bottom = side / 2.0
+		if not p.has("box"):
+			continue   # the intro has no title or buttons
+		p["box"].add_theme_constant_override("separation", int(14 * u))
+		p["title"].add_theme_font_size_override("font_size", int(46 * u))
+		for btn in p["buttons"]:
+			btn.custom_minimum_size = Vector2(0, 46 * u)   # width fills the PDA screen
+			btn.add_theme_font_size_override("font_size", int(22 * u))
+
+# ---------- HP bar ----------
 
 func _build_hp() -> void:
 	hpbar = Control.new()
@@ -77,6 +205,8 @@ func _update_hp() -> void:
 	hpfill.color = Color(0.85, 0.15, 0.15).lerp(Color(0.2, 0.85, 0.25), ratio)
 	hplabel.text = "%d / %d" % [hp, _maxhp]
 
+# ---------- menu / death ----------
+
 func _build_menu() -> void:
 	menu = Control.new()
 	menu.name = "Menu"
@@ -88,31 +218,10 @@ func _build_menu() -> void:
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu.add_child(bg)
 
-	var center = CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	menu.add_child(center)
-
-	var box = VBoxContainer.new()
-	box.add_theme_constant_override("separation", 24)
-	center.add_child(box)
-
-	var title = Label.new()
-	title.text = "MiniStalk"
-	title.add_theme_font_size_override("font_size", 52)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(title)
-
-	var startbtn = Button.new()
-	startbtn.text = "Start"
-	startbtn.custom_minimum_size = Vector2(220, 52)
-	startbtn.pressed.connect(start_game)
-	box.add_child(startbtn)
-
-	var quitbtn = Button.new()
-	quitbtn.text = "Quit"
-	quitbtn.custom_minimum_size = Vector2(220, 52)
-	quitbtn.pressed.connect(quit_game)
-	box.add_child(quitbtn)
+	_make_pda_panel(menu, "MiniStalk", [
+		["Start", start_game],
+		["Quit", quit_game],
+	])
 
 	add_child(menu)
 
@@ -127,37 +236,10 @@ func _build_death() -> void:
 	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	death.add_child(bg)
 
-	var center = CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	death.add_child(center)
-
-	var box = VBoxContainer.new()
-	box.add_theme_constant_override("separation", 24)
-	center.add_child(box)
-
-	var title = Label.new()
-	title.text = "You Died"
-	title.add_theme_font_size_override("font_size", 52)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	box.add_child(title)
-
-	var restartbtn = Button.new()
-	restartbtn.text = "Restart"
-	restartbtn.custom_minimum_size = Vector2(220, 52)
-	restartbtn.pressed.connect(restart)
-	box.add_child(restartbtn)
-
-	var menubtn = Button.new()
-	menubtn.text = "Menu"
-	menubtn.custom_minimum_size = Vector2(220, 52)
-	menubtn.pressed.connect(show_menu)
-	box.add_child(menubtn)
-
-	var quitbtn = Button.new()
-	quitbtn.text = "Quit"
-	quitbtn.custom_minimum_size = Vector2(220, 52)
-	quitbtn.pressed.connect(quit_game)
-	box.add_child(quitbtn)
+	_make_pda_panel(death, "You Died", [
+		["Restart", restart],
+		["Quit", quit_game],
+	])
 
 	add_child(death)
 

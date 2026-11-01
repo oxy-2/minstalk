@@ -485,7 +485,7 @@ position = Vector2(1538, 198)
 position = Vector2(2150, -120)
 
 [node name="obelisk" parent="." unique_id=1409942290 instance=ExtResource("27_1fr6y")]
-position = Vector2(2572, -438)
+position = Vector2(2596, -438)
 
 [node name="obelisk2" parent="." unique_id=683922240 instance=ExtResource("27_1fr6y")]
 position = Vector2(2509, -372)
