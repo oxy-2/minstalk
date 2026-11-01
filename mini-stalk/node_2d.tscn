@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://d37yomy0oaawf" path="res://assets/Map Props/tree10.png" id="17_7plk7"]
 [ext_resource type="Script" uid="uid://ck8u8a0t4pq2h" path="res://treeAnimated.gd" id="18_fbwgr"]
 [ext_resource type="PackedScene" uid="uid://b1s0r3aenqaqy" path="res://outlaw.tscn" id="25_bjha6"]
+[ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="26_pistol"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mj2a"]
 texture = ExtResource("1_2nhjh")
@@ -461,7 +462,11 @@ frame = 2
 frame_progress = 0.8387906
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=851884585]
-zoom = Vector2(1.25, 1.25)
+zoom = Vector2(2, 2)
+
+[node name="pistol" parent="CharacterBody2D" unique_id=2078748209 instance=ExtResource("26_pistol")]
+position = Vector2(12, 0)
+scale = Vector2(0.6329904, 0.7795791)
 
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b1s0r3aenqaqy"]
 
 [ext_resource type="Script" uid="uid://dvowdo1yakqcr" path="res://outlawlogic.gd" id="1_8q5mo"]
+[ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="2_pistol"]
 [ext_resource type="Texture2D" uid="uid://cbrhh0buu68xy" path="res://assets/art/enemies/thefting individuals/Outlaw1.png" id="1_jty0v"]
 [ext_resource type="Texture2D" uid="uid://lnptkrtabfuw" path="res://assets/art/enemies/thefting individuals/Outlaw2.png" id="2_8q5mo"]
 [ext_resource type="Texture2D" uid="uid://5d65p8gpvr0v" path="res://assets/art/enemies/thefting individuals/Outlaw3.png" id="3_i4vy0"]
@@ -38,7 +39,7 @@ animations = [{
 
 [node name="outlaw" type="CharacterBody2D" parent="." unique_id=782209253]
 script = ExtResource("1_8q5mo")
-SPEED = 300.0
+outlawspeed = 100.0
 
 [node name="outlawhitbox" type="CollisionShape2D" parent="outlaw" unique_id=617423606]
 shape = SubResource("CapsuleShape2D_dxifv")
@@ -49,4 +50,7 @@ sprite_frames = SubResource("SpriteFrames_geruv")
 animation = &"walk"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="outlaw" unique_id=1962289252]
-rect = Rect2(-6, -26, 11, 14)
+rect = Rect2(-40, -40, 80, 80)
+
+[node name="pistol" parent="outlaw" instance=ExtResource("2_pistol")]
+position = Vector2(8, 0)

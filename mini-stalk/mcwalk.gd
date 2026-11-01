@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var SPEED : float = 200.00
 @export var SPRINT_SPEED : float = 300.00
+@export var health := 10
 
 @onready var animated_sprite = $AnimatedSprite2D
 
@@ -24,3 +25,10 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.stop() # criss corss
 		
 	move_and_slide() # cha cha real smooth
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	print("player hp: ", health)
+	if health <= 0:
+		print("player died")
+		queue_free()
