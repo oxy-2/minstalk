@@ -61,4 +61,4 @@ maxfiredist = 0.0
 shoot_audio = ExtResource("8_kjonp")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="obelisk/akm" unique_id=1514010117]
-volume_db = -10.0
+volume_db = -15.0
