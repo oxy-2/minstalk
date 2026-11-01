@@ -39,6 +39,7 @@ animations = [{
 
 [node name="obelisk" type="CharacterBody2D" parent="." unique_id=2005471926]
 script = ExtResource("1_g4ijs")
+obeliskspeed = 80.0
 
 [node name="obeliskhitbox" type="CollisionShape2D" parent="obelisk" unique_id=130432315]
 shape = SubResource("CapsuleShape2D_n4y1h")
@@ -53,6 +54,4 @@ rect = Rect2(-40, -40, 80, 80)
 
 [node name="akm" parent="obelisk" unique_id=248630439 instance=ExtResource("7_akm")]
 position = Vector2(8, 0)
-shootcooldown = 0.25
-enemyinterval = 0.1
 turnspeed = 6.0
