@@ -28,6 +28,7 @@
 [ext_resource type="AudioStream" uid="uid://belkdqtt02qc2" path="res://assets/sounds/input/makarov.mp3" id="26_2hxjc"]
 [ext_resource type="PackedScene" uid="uid://c8pistol0gun1" path="res://pistol.tscn" id="26_pistol"]
 [ext_resource type="PackedScene" uid="uid://cw56tp6hgryo5" path="res://obelisk.tscn" id="27_1fr6y"]
+[ext_resource type="Texture2D" uid="uid://8f0wm0r8pvc7" path="res://assets/art/font/statuses/bullet/gunshot.png" id="27_2u7jv"]
 [ext_resource type="Script" uid="uid://cy7vjp4yos8xj" path="res://gameui.gd" id="28_ui"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mj2a"]
@@ -474,6 +475,12 @@ shoot_audio = ExtResource("26_2hxjc")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharacterBody2D/pistol" unique_id=88507451]
 volume_db = -20.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="CharacterBody2D/pistol" unique_id=401657479]
+visible = false
+texture = ExtResource("27_2u7jv")
+centered = false
+offset = Vector2(5, -7)
 
 [node name="outlaw" parent="." unique_id=1930604568 instance=ExtResource("25_bjha6")]
 position = Vector2(1011, -72)
