@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var okeepdistance := 180.0
 @export var oreloadkeepdistance := 240.0
 @export var ostrafespeed := 120.0
+@export var obulletaggro := 480.0
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var anim = $obelisksprite
@@ -12,11 +13,6 @@ extends CharacterBody2D
 
 var activated := false
 var _strafetime := 0.0
-var _path: PackedVector2Array = []
-var _pathindex := 0
-var _repathtimer := 0.0
-var _stucktimer := 0.0
-var _lastpos := Vector2.ZERO
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -37,7 +33,16 @@ func _is_reloading() -> bool:
 	return false
 
 func _physics_process(delta: float) -> void:
-	if not activated or not is_instance_valid(player):
+	if not is_instance_valid(player):
+		velocity = Vector2.ZERO
+		anim.stop()
+		return
+
+	if not activated and _player_bullet_nearby():
+		activated = true
+		print(name, " return fire")
+
+	if not activated:
 		velocity = Vector2.ZERO
 		anim.stop()
 		return
@@ -46,59 +51,50 @@ func _physics_process(delta: float) -> void:
 	var dist = to_player.length()
 	var dir = to_player.normalized() if dist > 0.001 else Vector2.RIGHT
 
-	# stuck on map collision -> kick sideways and repath
-	if global_position.distance_to(_lastpos) < 0.8 and velocity.length() > 20.0:
-		_stucktimer += delta
-		if _stucktimer > 0.45:
-			_stucktimer = 0.0
-			_repathtimer = 0.0
-			velocity += dir.orthogonal() * obeliskspeed * (1.0 if randf() > 0.5 else -1.0)
-	else:
-		_stucktimer = 0.0
-	_lastpos = global_position
+	_strafetime += delta
+	var strafeamt = sin(_strafetime * 1.8)
+	var keep = oreloadkeepdistance if _is_reloading() else okeepdistance
 
-	# path around map hitbox when the straight line is blocked
-	var losblocked = navgrid.is_los_blocked(global_position, player.global_position, [get_rid()], self)
 	var motion := Vector2.ZERO
-
-	if losblocked:
-		_repathtimer -= delta
-		if _repathtimer <= 0.0:
-			_repathtimer = 0.28
-			_path = navgrid.find_path(global_position, player.global_position, self)
-			_pathindex = 0
-		if _path.size() > 0:
-			if _pathindex < _path.size() - 1 and global_position.distance_to(_path[_pathindex]) < 18.0:
-				_pathindex += 1
-			var target = _path[_pathindex]
-			var to_target = target - global_position
-			if to_target.length() > 0.001:
-				motion = to_target.normalized() * obeliskspeed
-				dir = to_target.normalized()
-		else:
-			motion = dir * obeliskspeed
-	else:
-		_path = PackedVector2Array()
-		_pathindex = 0
-		_repathtimer = 0.0
-
-		# smooth back-and-forth strafe
-		_strafetime += delta
-		var strafeamt = sin(_strafetime * 1.8)
-
-		# step back while reloading
-		var keep = oreloadkeepdistance if _is_reloading() else okeepdistance
-
-		if dist > keep + 28.0:
-			motion = dir * obeliskspeed
-		elif dist < keep - 28.0:
-			motion = -dir * obeliskspeed
-		motion += dir.orthogonal() * strafeamt * ostrafespeed
+	if dist > keep + 28.0:
+		motion = _steer(dir) * obeliskspeed
+	elif dist < keep - 28.0:
+		motion = _steer(-dir) * obeliskspeed
+	motion += dir.orthogonal() * strafeamt * ostrafespeed
 
 	velocity = motion
 	anim.play("walk")
 	anim.flip_h = dir.x < 0
 	move_and_slide()
+
+# slide along walls instead of sticking: if the way ahead is blocked, try a few angles
+func _steer(dir: Vector2) -> Vector2:
+	if _ray_free(dir):
+		return dir
+	for ang in [0.55, -0.55, 1.1, -1.1, 1.7, -1.7]:
+		var alt = dir.rotated(ang)
+		if _ray_free(alt):
+			return alt
+	return Vector2.ZERO
+
+func _ray_free(dir: Vector2) -> bool:
+	var q = PhysicsRayQueryParameters2D.create(global_position, global_position + dir * 52.0)
+	q.exclude = [get_rid()]
+	q.collide_with_areas = false
+	var hit = get_world_2d().direct_space_state.intersect_ray(q)
+	if hit.is_empty():
+		return true
+	var col = hit.get("collider")
+	return col is CharacterBody2D
+
+func _player_bullet_nearby() -> bool:
+	for b in get_tree().get_nodes_in_group("bullet"):
+		if not is_instance_valid(b):
+			continue
+		if b.shooter != null and b.shooter.is_in_group("player"):
+			if global_position.distance_to(b.global_position) <= obulletaggro:
+				return true
+	return false
 
 func take_damage(amount: int) -> void:
 	ohealth -= amount

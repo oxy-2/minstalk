@@ -464,6 +464,7 @@ frame = 2
 frame_progress = 0.8387906
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=851884585]
+zoom = Vector2(1.5, 1.5)
 
 [node name="pistol" parent="CharacterBody2D" unique_id=2078748209 instance=ExtResource("26_pistol")]
 position = Vector2(12, 0)

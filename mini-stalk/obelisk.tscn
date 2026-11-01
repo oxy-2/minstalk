@@ -53,6 +53,6 @@ rect = Rect2(-40, -40, 80, 80)
 
 [node name="akm" parent="obelisk" unique_id=248630439 instance=ExtResource("7_akm")]
 position = Vector2(8, 0)
-shootcooldown = 0.025
-enemyinterval = 0.001
+shootcooldown = 0.25
+enemyinterval = 0.1
 turnspeed = 6.0

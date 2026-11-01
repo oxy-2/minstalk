@@ -8,6 +8,7 @@ var direction := Vector2.RIGHT
 var shooter: Node2D = null
 
 func _ready() -> void:
+	add_to_group("bullet")
 	rotation = direction.angle()
 	body_entered.connect(_on_body_entered)
 	await get_tree().create_timer(lifetime).timeout
