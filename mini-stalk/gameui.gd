@@ -4,8 +4,12 @@ extends CanvasLayer
 
 const BG_PATH := "res://assets/art/menus/pda/menu_screen_pda.png"      # <<< PUT YOUR MENU/DEATH PDA FILE PATH HERE (e.g. "res://sprites/pda.png")
 const INTRO_PATH := "res://assets/art/menus/title screen/menu_screen_pda.png"   # <<< PUT YOUR SECOND (INTRO) SPRITE FILE PATH HERE
-const INTRO_TIME := 5.0                      # <<< how long the intro stays on screen (seconds)
+const INTRO_TIME := 3.0                      # <<< how long the intro stays on screen (seconds)
 const PDA_SCALE := 1.25                      # <<< SIZE: sprite side = screen height * this. Bigger number = bigger PDA
+
+const END_X := 3325.0
+const END_Y := -1045
+const END_FADE := 2.0
 
 # <<< BUTTON AREA: where the PDA's light screen is, as fractions of the sprite (0.0 - 1.0).
 # Nudge these if the buttons don't sit perfectly inside the screen.
@@ -14,6 +18,8 @@ const SCREEN_RIGHT := 0.70
 const SCREEN_TOP := 0.28
 const SCREEN_BOTTOM := 0.72
 
+var endscreen: Control
+var _ended := false
 var menu: Control
 var death: Control
 var intro: Control
@@ -32,6 +38,7 @@ func _ready() -> void:
 	_build_death()
 	_build_hp()
 	_build_intro()   # built last so it draws on top of everything
+	_build_end()
 	_resize_panels()
 	get_viewport().size_changed.connect(_resize_panels)
 	print("gameui ready, skip=", _skip_menu)
@@ -46,8 +53,11 @@ func _ready() -> void:
 		show_menu()
 
 func _process(_delta: float) -> void:
-	hpbar.visible = not (intro.visible or menu.visible or death.visible)
+	hpbar.visible = not (intro.visible or menu.visible or death.visible or _ended)
+	if _ended:
+		return
 	_update_hp()
+	_check_end()
 
 # ---------- intro ----------
 
@@ -267,3 +277,46 @@ func restart() -> void:
 
 func quit_game() -> void:
 	get_tree().quit()
+
+func _build_end() -> void:
+	endscreen = Control.new()
+	endscreen.name = "EndScreen"
+	endscreen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	endscreen.process_mode = Node.PROCESS_MODE_ALWAYS
+	endscreen.mouse_filter = Control.MOUSE_FILTER_STOP
+	endscreen.visible = false
+
+	var white = ColorRect.new()
+	white.color = Color.WHITE
+	white.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	white.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	endscreen.add_child(white)
+
+	var center = CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	endscreen.add_child(center)
+
+	var label = Label.new()
+	label.text = "Thanks for playing"
+	label.add_theme_font_size_override("font_size", 52)
+	label.add_theme_color_override("font_color", Color(0.1, 0.1, 0.1))
+	center.add_child(label)
+
+	add_child(endscreen)   # added last so it draws on top of everything
+
+func _check_end() -> void:
+	var p = get_tree().get_first_node_in_group("player")
+	if p == null or not is_instance_valid(p):
+		return
+	var pos: Vector2 = p.global_position
+	if pos.x >= END_X or pos.y < END_Y:   # use <= instead if the end is to the left / upward
+		start_end()
+
+func start_end() -> void:
+	_ended = true
+	get_tree().paused = true   # freeze the game (this node still runs, so the fade works)
+	endscreen.visible = true
+	endscreen.modulate.a = 0.0
+	var tw = create_tween()
+	tw.tween_property(endscreen, "modulate:a", 1.0, END_FADE)
