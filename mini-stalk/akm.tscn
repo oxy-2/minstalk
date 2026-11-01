@@ -5,7 +5,13 @@
 
 [node name="akm" type="Node2D"]
 script = ExtResource("1_gun")
-enemyinterval = 0.45
+enemyinterval = 0.1
+hasreload = true
+reloadtime = 1.0
+reloadinterval = 30.0
+aimheight = -14.0
+spread = 0.12
+maxfiredist = 320.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_akm")

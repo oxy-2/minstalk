@@ -31,4 +31,7 @@ func take_damage(amount: int) -> void:
 	print("player hp: ", health)
 	if health <= 0:
 		print("player died")
+		var ui = get_tree().get_first_node_in_group("gameui")
+		if ui:
+			ui.show_death()
 		queue_free()
