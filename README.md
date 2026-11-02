@@ -1,4 +1,4 @@
-# minstalk
+# ministalk
 
 MiniStalk is a independent, free, open-source game inspired by post-apocalyptic sci-fi and the Chernobyl Exclusion Zone. This project is fan-made and is not affiliated with, endorsed by, or associated with GSC Game World.
 
