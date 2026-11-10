@@ -10,9 +10,11 @@ you can play our game at: https://mimisol-1.itch.io/ministalk
 
 
 here are some screenshots from the game:
+![gameplay](https://github.com/oxy-2/minstalk/blob/main/gameplay.gif?raw=true)
+![](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/in-game%20with%20obelisk.png?raw=true)
+
 ![godot](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/godot.png?raw=true)
 ![titlescreen](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/titlescreen.png?raw=true)
-![](https://github.com/oxy-2/minstalk/blob/main/docs/-%20weekly%20reports/rhime7274/in-game%20with%20obelisk.png?raw=true)
 
 thank you for your time :D
 
