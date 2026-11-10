@@ -6,7 +6,7 @@ MiniStalk is a independent, free, open-source game inspired by post-apocalyptic 
 ministalk is a game about exploring and fighting enemies in a wasteland, done all in godot, anyways so like we got ministalk which is like a lil demo or proof of concept and imo for my first time in godot im happy with it and so is the team insert yippie emoji.
 
 
-you can play our game at: https://mimisol-1.itch.io/ministalk
+you can play our game at: ![](https://mimisol-1.itch.io/ministalk)
 
 
 here are some screenshots from the game:
@@ -33,6 +33,8 @@ Credits:
 -Oxy: developer for the gunplay, movement, AI for enemies and health bar
 -Grand: UI designer, winning condition and voice actor for Outlaws
 -JohnTarkov: Main sprite designer, particle effects, voice actor for the Obelisk and sound designer
+
+
 
 thank you for your time :D
 
