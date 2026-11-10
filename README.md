@@ -27,6 +27,7 @@ How to run it:
 Go to the link mentioned above and click the RUN button to start the game since it runs on the web!
 
 How it works:
+So in short everything is in godot, we had like big dreams to shoot way above what we ended up having time to make it as what it ended up being, so we have an animated tree and the characters are aminated and there's bullets that move and like guns and such, all of it is just gdscript really, i used mimo the like ai model for a bit of help with the code cuz i had no experience with the game code, also the map is like tiles and i think thats about it really, oh yeah for the sprites we used libresprite, also lets us do animation s, we love libresprite <3
 
 
 Credits:
